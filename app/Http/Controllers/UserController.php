@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {   
+    public function logged(){
+        return view('login');
+    }
     public function show(){
     $Data = User::all();
     return view('dashboard',['users'=> $Data]);

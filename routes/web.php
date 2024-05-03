@@ -16,15 +16,7 @@ use App\Http\Controllers\reclamController;
 |
 */
 
-Route::get('/test', function () {
-    return view('test');
-});
-Route::get('/moud', function (Request $request) {
-    return [
-        "name" => $request-->url(),
-        "article" => "article1"
-    ];
-});
+
 // user routes
 Route::get('/add', [UserController::class, "Correcthomepage"]);
 Route::post('/register', [UserController::class, "register"]);
