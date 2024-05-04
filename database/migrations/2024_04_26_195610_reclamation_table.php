@@ -11,7 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('reclamations', function (Blueprint $table) {
+            $table->id();
+            $table->string('titre');
+            $table->string('description');
+            $table->string('attachement');
+            $table->timestamps();
+            // $table->forignId('user_id');
+        });
     }
 
     /**

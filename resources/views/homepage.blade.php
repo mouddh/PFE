@@ -21,9 +21,9 @@
             <label for="password-register-confirm" class="text-muted mb-1"><small>Confirm Password</small></label>
             <input name="password" id="password-register-confirm" class="form-control" type="password" placeholder="Confirm password" />
           </div>
-           {{-- <button  type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Sign up for OurApp</button> --}}
-           <button type="submit" class="btn btn-primary btn-lg">ajouter</button>
-        </form>
+           {{-- <button  type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Sign up for OurApp</button>  --}}
+            <button type="submit" class="btn btn-primary btn-lg">ajouter</button> 
+         </form>
       </div>
     </div>
   </div>
