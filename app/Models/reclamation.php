@@ -10,6 +10,9 @@ class reclamation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'titre', 'description', 'attachement'
+        'titre', 'description', 'attachement','user_id'
     ];
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

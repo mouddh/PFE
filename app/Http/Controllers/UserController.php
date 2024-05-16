@@ -9,17 +9,14 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {   
     
-    public function show(){
-    $Data = User::all();
-    return view('dashboard',['users'=> $Data]);
-}
+    
     public function logout(){
         auth()->logout();
-        return redirect('/login')->with('success' ,'you logged out');
+        return redirect('/');
     }
     public function Correcthomepage(){
         if ( auth()->check()){
-            return view('/home')->with('success' ,'you logged in');
+            return view('/homepage')->with('success' ,'you logged in');
 
         } else {
             return view('loggedIN');
@@ -36,7 +33,7 @@ class UserController extends Controller
         ]);
         if (auth()->attempt(['username'=>$incomingFields['loginusername'],'password'=>$incomingFields['loginpassword'] ])){
             $request->session()->regenerate();
-            return redirect('/');
+            return redirect('/home');
         } else {
             return redirect()->route('logedIn');
         }
@@ -47,6 +44,7 @@ class UserController extends Controller
         'username' => 'required',
         'email' => 'required',
         'password' => 'required',
+        'telephone' => 'required',
       
     ]);
        User::create($incomingFields);

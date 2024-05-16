@@ -1,11 +1,15 @@
 <x-layouts>
     <div class="row align-items-center">
       <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-        <form action="register" method="POST" id="registration-form">
+        <form action="register" method="Post" id="registration-form">
           @csrf
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1"><small>Username</small></label>
             <input name="username" id="username-register" class="form-control" type="text" placeholder="Pick a username" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="telephone-register" class="text-muted mb-1"><small>telephone</small></label>
+            <input name="telephone" id="telephone-register" class="form-control" type="text" placeholder="Pick a username" autocomplete="off" />
           </div>
 
           <div class="form-group">

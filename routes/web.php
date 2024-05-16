@@ -19,23 +19,34 @@ use App\Http\Controllers\servicesController;
 
 
 // user routes
-Route::get('/add', [UserController::class, "Correcthomepage"]);
+Route::get('/add', [UserController::class, "Correcthomepage"])->name('login');
 Route::post('/login', [UserController::class, "login"]);
-Route::get('/login', [UserController::class, "loggedIN"])->name('logedIn');
+Route::get('/', [UserController::class, "loggedIN"])->name('logedIn');
 Route::post('/register', [UserController::class, "register"]);
 Route::get('/logout', [UserController::class, "logout"]);
 
 //services routes
 Route::get('/services', [servicesController::class, "services"]);
+Route::get('/ajoutSer', [servicesController::class, "ajoutSer"]);
+Route::post('/ajouter', [servicesController::class, "ajouter"]);
+
 
 
 // reclamation routes
 Route::get('/reclamer', [reclamController::class, "Reclamation"]);
 Route::post('/reclamer', [reclamController::class, "storeReclamation"]);
-Route::get('/reclamList', [reclamController::class, "show"]);
+Route::get('/reclamList/{user:username}', [reclamController::class, "show"])->middleware('auth');
+Route::get('/Details/{post}', [reclamController::class, "details"])->middleware('auth');
+Route::get('/Details/{post}', [reclamController::class, "details"])->middleware('auth');
+Route::delete('/Details/{post}', [reclamController::class, "delete"]);
+Route::get('/Details/{post}/edit', [reclamController::class, "showEditForme"]);
+Route::put('/Details/{post}', [reclamController::class, "Updated"]);
 //Route::get('/reclamer', [reclamController::class, "StoreReclamation"]);
 
-Route::get('/admin', [AdminController::class, "administration"]);
+//admin routes
+Route::get('/admin', [AdminController::class, "administration"])->middleware('auth');
 Route::get('/update/{id}', [AdminController::class, "update"]);
-Route::get('/admin', [UserController::class, "show"]);
-Route::get('/', [AdminController::class, "home"]);
+Route::post('/update/{id}', [AdminController::class, "update_user"]);
+Route::delete('/admin/{user}', [AdminController::class, "delete"]);
+Route::get('/admin', [AdminController::class, "show"])->middleware('auth');
+Route::get('/home', [AdminController::class, "home"])->middleware('auth');

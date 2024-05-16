@@ -28,7 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/" class="nav-link">Home</a>
+        <a href="/home" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -210,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="/reclamList" class="nav-link">
+            <a href="/reclamList/{{ auth()->user()->username }}" class="nav-link">
               <i class="nav-icon fas fa-ellipsis-h"></i>
               <p>reclamation's</p>
             </a>
@@ -276,7 +276,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
           Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
       </footer>
     </div>
     <!-- ./wrapper -->

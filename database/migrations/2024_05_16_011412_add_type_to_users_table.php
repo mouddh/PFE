@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reclamations', function (Blueprint $table) {
-            $table->id();
-            $table->string('titre');
-            $table->string('description');
-            $table->string('attachement');
-            $table->timestamps();
-            // $table->forignId('user_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('type')->default('client');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('type');
+        });
     }
 };
