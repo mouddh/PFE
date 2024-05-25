@@ -4,7 +4,9 @@ body,
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
-
+nav {
+  position: fixed;
+}
 .header-bar {
   background-color: #f9322c;
 }
@@ -51,6 +53,7 @@ body,
   font-size: 1.2rem;
   line-height: 1.75;
   color: #292929;
+  
 }
 
 .body-content p,

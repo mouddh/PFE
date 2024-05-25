@@ -19,10 +19,12 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>PFE</b>proj</a>
+      <img  src="{{ asset('dist/img/7Qba1f-LogoMakr.png')}}" alt="PFE Logo" class="brand-image" style="opacity: .8; max-width: 50%; height: auto;">
+
+      {{-- <a href="#" class="h1"><b>PFE</b>proj</a> --}}
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Connectez-vous pour commencer votre session</p>
 
       <form action="/login" method="post">
         @csrf
@@ -53,12 +55,7 @@
       </form>
       <!-- /.social-auth-links -->
 
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p>
+      
     </div>
     <!-- /.card-body -->
   </div>

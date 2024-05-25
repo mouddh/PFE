@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class servicesController extends Controller
 {
-    
+    public function delete(Service $service){
+        $service->delete();
+        return redirect('/services');
+    }
     public function ajoutSer(){
         return view('ajouterService');
     }

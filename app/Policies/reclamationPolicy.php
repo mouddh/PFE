@@ -13,7 +13,17 @@ class reclamationPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        if($user->type == 'engineer'){
+            return true;
+        }
+        return false;
+    }
+    public function client_update_reclamation(User $user): bool
+    {
+        if($user->type == 'client'){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -21,7 +31,10 @@ class reclamationPolicy
      */
     public function view(User $user, reclamation $post): bool
     {
-        //
+        if($user->type == 'technicien'){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -37,10 +50,10 @@ class reclamationPolicy
      */
     public function update(User $user, reclamation $post): bool
     {
-        if($user->type == 'admin'){
+        if($user->type == 'admin' || $user->type == 'technicien'){
             return true;
         }
-        return $user->id == $post->user_id;
+        return false;
     }
 
     /**
@@ -48,7 +61,7 @@ class reclamationPolicy
      */
     public function delete(User $user, reclamation $post): bool
     {
-        if($user->type == 'admin'){
+        if($user->type == 'admin' || $user->type == 'technicien' ){
             return true;
         }
         return $user->id == $post->user_id;
