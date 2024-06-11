@@ -27,9 +27,10 @@ Route::post('/login', [UserController::class, "login"]);
 Route::get('/', [UserController::class, "loggedIN"])->name('logedIn');
 Route::post('/register', [UserController::class, "register"]);
 Route::get('/logout', [UserController::class, "logout"]);
-Route::get('/profile', [UserController::class, "profile"]);
+Route::get('/profile', [UserController::class, "profile"])->middleware('auth');
 Route::post('/profile/update/telephone', [UserController::class, 'updateTelephone'])->name('profile.update.telephone');
 Route::post('/profile/update/password', [UserController::class, 'updatePassword'])->name('profile.update.password');
+
 
 //services routes
 Route::get('/services', [servicesController::class, "services"])->middleware('can:AdminPages');
@@ -41,13 +42,13 @@ Route::delete('/services/{id}', [servicesController::class, "delete"]);
 
 
 // reclamation routes
-Route::get('/reclamer', [reclamController::class, "Reclamation"]);
-Route::post('/reclamer', [reclamController::class, "storeReclamation"]);
+Route::get('/reclamer', [reclamController::class, "Reclamation"])->middleware('auth');
+Route::post('/reclamer', [reclamController::class, "storeReclamation"])->middleware('auth');
 Route::get('/reclamList/{user:username}', [reclamController::class, "show"])->middleware('auth');
 Route::get('/Details/{post}', [reclamController::class, "details"])->middleware('auth');
-Route::delete('/Details/{post}', [reclamController::class, "delete"]);
-Route::get('/Details/{post}/edit', [reclamController::class, "showEditForme"]);
-Route::put('/Details/{post}', [reclamController::class, "Updated"]);
+Route::delete('/Details/{post}', [reclamController::class, "delete"])->middleware('auth');
+Route::get('/Details/{post}/edit', [reclamController::class, "showEditForme"])->middleware('auth');
+Route::put('/Details/{post}', [reclamController::class, "Updated"])->middleware('auth');
 
 Route::put('/reclamation/{id}', [ReclamController::class, 'assignEngineer'])->name('reclamation.assignEngineer')->middleware('auth');
 
@@ -55,11 +56,12 @@ Route::put('/reclamation/{id}', [ReclamController::class, 'assignEngineer'])->na
 
 //admin routes
 // Route::get('/admin', [AdminController::class, "administration"])->middleware('can:AdminPages');
-Route::get('/update/{id}', [AdminController::class, "update"]);
-Route::post('/update/{id}', [AdminController::class, "update_user"]);
+Route::get('/update/{id}', [AdminController::class, "update"])->middleware('can:AdminPages');
+Route::post('/update/{id}', [AdminController::class, "update_user"])->middleware('can:AdminPages');
 Route::delete('/admin/{user}', [AdminController::class, "delete"])->middleware('can:AdminPages');
 Route::get('/admin', [AdminController::class, "show"])->middleware('auth')->middleware('can:AdminPages');
 Route::get('/home/{user:username}', [AdminController::class, "home"])->middleware('auth');
+
 
 //technicien routes
 Route::get('/TecPage', [TechnicienController::class, "showTecPage"])->middleware('auth')->middleware('can:TecPages');
@@ -67,4 +69,5 @@ Route::put('/changeStatus/{id}', [TechnicienController::class, "updateStatus"])-
 
 //engineer routes
 Route::get('/engineer/reclamations', [EngineerController::class, 'index'])->name('engineer.reclamations')->middleware('auth');
+Route::put('/reject/{id}', [reclamController::class, 'rejectReclamation'])->name('reclamation.reject');
 

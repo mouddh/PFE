@@ -5,19 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\reclamation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    // public function changeStatus(Request $request, $id){
-    //     $request->validate([
-    //         'status' => 'required',
-    //     ]);
-    //     $Datas = reclamation::find($request->id);
+    // // Import necessary namespaces
 
-    //     $Datas->status = $request->status;
-    //     $Datas->update();
-    //     return redirect('/TecPage')->with('status','l\'utilisateur a bien ete modifier par succes');
-    // }
+
+
+
     public function updateStatus(Request $request, $id)
     {
         // Validate the incoming request
@@ -86,18 +82,54 @@ class AdminController extends Controller
     // }
     public function home(User $user){
         // $Data = reclamation::all();
+        $engineer = Auth::user();
+        if ($user->type == 'engineer') {
+            $userReclamations = reclamation::where('engineer_id', $engineer->id)->get();
+            $postCount = $userReclamations->count();
+            $transmisCount = $userReclamations->where('status', 'transmis')->count();
+            $traiteeCount = $userReclamations->where('status', 'traitee')->count();
+        } else {
+            $userReclamations = $user->posts()->latest()->get();
+            $postCount = $user->posts()->count();
+            $transmisCount = $user->posts()->where('status', 'transmis')->count();
+            $traiteeCount = $user->posts()->where('status', 'traitee')->count();
+            $rejeteeCount = $user->posts()->where('status', 'rejetée')->count();
+            
+        }
+
+        // user reclamations count
         $reclamations = $user->posts()->latest()->get();
-        $postCount = $user->posts()->count();
         
-        $transmisCount = $user->posts()->where('status', 'transmis')->count();
-        $traiteeCount = $user->posts()->where('status', 'traitee')->count();
+
+        // all reclamations count
+        $totalReclamations = Reclamation::count();
+
+    
+        $reclamations = Reclamation::latest()->get();
+        $AllenvoyerCount = Reclamation::where('status', 'envoyer')->count();
+        $AlltransmisCount = Reclamation::where('status', 'transmis')->count();
+        $AlltraiteeCount = Reclamation::where('status', 'traitee')->count();
+        $AllrejeteeCount = Reclamation::where('status', 'rejetée')->count();
+
+        $reclamationsData = [
+            'envoyer' => $totalReclamations,
+            'transmis' => $AlltransmisCount,
+            'traitee' => $AlltraiteeCount,
+            'rejetee' => $AllrejeteeCount,
+        ];
         
-        return view('home',[
+        return view('home',compact('reclamationsData'),[
             'username' => $user->username, 
-            'posts'=> $reclamations,
+            'posts'=> $userReclamations,
             'postCount'=>  $postCount ,
             'transmisCount'=> $transmisCount,
-            'traiteeCount'=> $transmisCount,
+            'traiteeCount'=> $traiteeCount,
+            'rejeteeCount'=>   $rejeteeCount,
+            'Allenvoyer'=> $totalReclamations,
+            'Alltransmis'=> $AlltransmisCount,
+            'Alltraitee'=> $AlltraiteeCount,
+            'Allrejetee'=>  $AllrejeteeCount,
+            'Allreclamations'=> $totalReclamations,
     ]);
     }
 }

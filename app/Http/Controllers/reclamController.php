@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 class reclamController extends Controller
 {
     //test 
+    public function rejectReclamation(Request $request, $id)
+{
+    $reclamation = Reclamation::findOrFail($id);
+    $reclamation->status = $request->input('status');
+    $reclamation->save();
+
+    return redirect()->back()->with('success', 'Réclamation rejetée avec succès.');
+}
+
+
+
     public function assignEngineer(Request $request, $id)
     {
         // Validate the incoming request
@@ -30,17 +41,7 @@ class reclamController extends Controller
         return redirect()->back()->with('success', 'Reclamation assigned successfully!');
     }
 
-    // public function showAssignForm($id)
-    // {
-    //     // Retrieve the reclamation record
-    //     $reclamation = Reclamation::findOrFail($id);
-
-    //     // Retrieve the list of engineers
-    //     $engineers = User::where('type', 'engineer')->get(); // Assuming 'role' column distinguishes roles
-
-    //     // Return the view with the reclamation and engineers
-    //     return view('assign_engineer', compact('reclamation', 'engineers'));
-    // }
+    
 
 
 
@@ -86,16 +87,16 @@ class reclamController extends Controller
     }
 
     public function show(User $user){
-        // $Data = reclamation::all();
+        $Data = reclamation::all();
        
-        return view('reclamList',['username' => $user->username, 'posts'=> $user->posts()->latest()->get(), 'postCount'=> $user->posts()->count()]);
+        return view('reclamList',['username' => $user->username, 'posts'=> $user->posts()->latest()->get(), 'postCount'=> $user->posts()->count(), 'reclamations'=>$Data]);
     }
 
     public function storeReclamation(Request $request){
         $incomingFields = $request->validate([
             'titre' => 'required',
             'description' => 'required',
-            'attachement' => 'nullable|mimes:png,jpg,jpeg,webp',
+            'attachement' => 'nullable|mimes:png,jpg,jpeg,webp,pdf',
         ]);
         $incomingFields['titre'] = strip_tags($incomingFields['titre']);
         $incomingFields['description'] = strip_tags($incomingFields['description']); 

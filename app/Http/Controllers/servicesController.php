@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class servicesController extends Controller
 {
-    public function delete(Service $service){
-        $service->delete();
+    public function delete(Service $id){
+        $id->delete();
         return redirect('/services');
     }
     public function ajoutSer(){
@@ -26,6 +26,6 @@ class servicesController extends Controller
         $incomingFields['titre'] = strip_tags($incomingFields['titre']); 
         
         $moud = service::create($incomingFields);
-        return 'hey';
+        return redirect('/services')->with('success','le service a bien ete ajouter');
     } 
 }

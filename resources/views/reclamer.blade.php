@@ -1,31 +1,11 @@
 <x-layouts>
-    {{-- <div class="container py-md-5 container--narrow">
-        <form  style="width: 40%" action="/reclamer" method="POST" enctype="multipart/form-data">
-          @csrf
-          <div class="form-group">
-            <label for="post-title" class="text-muted mb-1"><strong>titre</strong></label>
-            <input required name="titre" id="post-title" class="form-control form-control-lg form-control-title" type="text" placeholder="" autocomplete="off" />
-          </div>
-          <div class="form-group">
-            <label for="post-titre" class="text-muted mb-1"><small>attachement</small></label>
-            <input required name="attachement" id="post-titre" class="form " type="file" placeholder="" autocomplete="off" />
-          </div>
-          
-  
-          <div class="form-group">
-            <label for="post-body" class="text-muted mb-1"><small>votre reclamation avec dettails</small></label>
-            <textarea required name="description" id="post-body" class="body-content tall-textarea form-control" type="text"></textarea>
-          </div>
-  
-          <button class="btn btn-primary">envoyer</button>
-        </form>
-      </div>--}}
+    
       <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">
-                        <h3>Saisir votre réclamation</h3>
+                    <div style="background-color:rgb(61, 74, 86)" class="card-header">
+                        <h3 style="color: aliceblue">Saisir votre réclamation</h3>
                     </div>
                     <div class="card-body">
                         <form action="/reclamer" method="POST" enctype="multipart/form-data">

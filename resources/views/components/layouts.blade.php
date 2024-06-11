@@ -1,223 +1,4 @@
-{{-- <!DOCTYPE html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PFE | Admin</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback')}}">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}" >
-  
-
-</head>
-<body style="margin-top: 10px" class="hold-transition sidebar-mini">
-    <div class="wrapper">
-
-  <!-- Navbar -->
-  <nav  class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      @if(auth()->user()->type == 'client')
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/home/{{auth()->user()->username}}" class="nav-link">Home</a>
-      </li>
-      @elseif(auth()->user()->type == 'technicien')
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/TecPage" class="nav-link">Home</a>
-      </li>
-      @elseif(auth()->user()->type == 'engineer')
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/engineer/reclamations" class="nav-link">Home</a>
-      </li>
-      @else
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/admin" class="nav-link">Home</a>
-      </li>
-      @endif
-      
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside style="position: fixed" class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PFE</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if(auth()->user()->type == 'admin')
-            <li class="nav-item">
-                <a href="/admin" class="nav-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" margin="10" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                      </svg>
-                  <p>
-                    Les utilisateur
-                  </p>
-                </a>
-              </li>
-              <li>
-            <li class="nav-item">
-                <a href="/services" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>
-                    Services
-                  </p>
-                </a>
-              </li>
-              @endif
-          </li>
-          <li class="nav-item">
-            <a href="/home/{{ auth()->user()->username }}" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>Tableau de bord</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/reclamList/{{ auth()->user()->username }}" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>Reclamation's</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
-              <p>Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/logout" class="nav-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
-                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-              </svg>
-              <p>logout</p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    {{ $slot }}
-    </div> 
-    
-
-  
-
- 
-    
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-        <div class="p-3">
-          <h5>Title</h5>
-          <p>Sidebar content</p>
-        </div>
-      </aside>
-      <!-- /.control-sidebar -->
-    
-      <!-- Main Footer -->
-      <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-          Anything you want
-        </div>
-        <!-- Default to the left -->
-      </footer>
-    </div>
-    
-  
-      
-  
-
- 
-  
-  
-    
-    
-    <!-- REQUIRED SCRIPTS -->
-    
-    <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
-    </body>
-    </html> --}}
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -230,47 +11,54 @@
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
-  <style>
-     /* .bg-brown {
-            background-color: #8B4513 !important;
-        } */
-    .register-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f8f9fa;
-    }
-    .register-card {
-      padding: 2rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-      background-color: #fff;
-    }
-    .form-title {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .form-group small {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
   
-    .brand-link {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 10px;
-    }
-    .brand-image {
-      height: auto;
-      max-height: 50px; /* Adjust as needed */
-      margin-right: 25px; /* Adjust spacing between logo and text */
-    }
-    .brand-text {
-      text-align: right;
-    }
-  </style>
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  
+  <style>
+    /* .bg-brown {
+           background-color: #8B4513 !important;
+       } */
+       .hidden {
+           display: none;
+       }
+   .register-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     background-color: #f8f9fa;
+   }
+   .register-card {
+     padding: 2rem;
+     border-radius: 0.5rem;
+     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+     background-color: #fff;
+   }
+   .form-title {
+     text-align: center;
+     margin-bottom: 2rem;
+   }
+   .form-group small {
+     display: block;
+     margin-bottom: 0.5rem;
+   }
+ 
+   .brand-link {
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     padding: 0 10px;
+   }
+   .brand-image {
+     height: auto;
+     max-height: 50px; /* Adjust as needed */
+     margin-right: 25px; /* Adjust spacing between logo and text */
+   }
+   .brand-text {
+     text-align: right;
+   }
+ </style>
 </head>
 <body style="margin-top: 10px" class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -344,10 +132,14 @@
   <!-- Main Sidebar Container -->
   <aside style="position: fixed" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img  src="{{ asset('dist/img/7Qba1f-LogoMakr.png')}}" alt="PFE Logo" class="brand-image" style="opacity: .8; max-width: 100%; height: auto;">
-      <span  >Gestions des<br>reclamations</span>
-    </a>
+    <div class="brand-link">
+      
+        <img  src="{{ asset('dist/img/7Qba1f-LogoMakr.png')}}" alt="PFE Logo" class="brand-image" style="opacity: .8; max-width: auto; height: 100px;">
+        <span style="width: 15px;color:rgb(46, 56, 65)" >..</span>
+        <span  >Gestions des<br>reclamations</span>
+        
+      
+   </div>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -366,17 +158,19 @@
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+      {{-- <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           @if(auth()->user()->type == 'admin')
           <li class="nav-item">
             <a href="/admin" class="nav-link">
+
               <i class="fas fa-users"></i>
-              <p>tableau de bord</p>
+              <p> Utilisateurs</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="/services" class="nav-link">
+
               <i class="fas fa-cogs"></i>
               <p>Services</p>
             </a>
@@ -384,15 +178,29 @@
           @endif
           <li class="nav-item">
             <a href="/home/{{ auth()->user()->username }}" class="nav-link">
+
               <i class="fas fa-tachometer-alt"></i>
               <p>tableau de bord</p>
             </a>
           </li>
           <li class="nav-item">
+            @if (auth()->user()->type == 'engineer')
+            <a href="/engineer/reclamations" class="nav-link">
+              <i class="fas fa-list"></i>
+              <p>Réclamations</p>
+            </a>
+            @elseif(auth()->user()->type == 'technicien')
+            <a href="/TecPage" class="nav-link">
+              <i class="fas fa-list"></i>
+              <p>Réclamations</p>
+            </a>
+            @else
             <a href="/reclamList/{{ auth()->user()->username }}" class="nav-link">
               <i class="fas fa-list"></i>
               <p>Réclamations</p>
             </a>
+            @endif
+            
           </li>
           <li class="nav-item">
             <a href="/profile" class="nav-link">
@@ -407,7 +215,62 @@
             </a>
           </li>
         </ul>
-      </nav>
+      </nav> --}}
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if(auth()->user()->type == 'admin')
+            <li class="nav-item">
+                <a href="/admin" class="nav-link {{ Request::is('admin') ? 'active' : '' }}">
+                    <i class="fas fa-users"></i>
+                    <p>Utilisateurs</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/services" class="nav-link {{ Request::is('services') ? 'active' : '' }}">
+                    <i class="fas fa-cogs"></i>
+                    <p>Services</p>
+                </a>
+            </li>
+            @endif
+            <li class="nav-item">
+                <a href="/home/{{ auth()->user()->username }}" class="nav-link {{ Request::is('home/' . auth()->user()->username) ? 'active' : '' }}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <p>tableau de bord</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                @if (auth()->user()->type == 'engineer')
+                <a href="/engineer/reclamations" class="nav-link {{ Request::is('engineer/reclamations') ? 'active' : '' }}">
+                    <i class="fas fa-list"></i>
+                    <p>Réclamations</p>
+                </a>
+                @elseif(auth()->user()->type == 'technicien')
+                <a href="/TecPage" class="nav-link {{ Request::is('TecPage') ? 'active' : '' }}">
+                    <i class="fas fa-list"></i>
+                    <p>Réclamations</p>
+                </a>
+                @else
+                <a href="/reclamList/{{ auth()->user()->username }}" class="nav-link {{ Request::is('reclamList/' . auth()->user()->username) ? 'active' : '' }}">
+                    <i class="fas fa-list"></i>
+                    <p>Réclamations</p>
+                </a>
+                @endif
+            </li>
+            <li class="nav-item">
+                <a href="/profile" class="nav-link {{ Request::is('profile') ? 'active' : '' }}">
+                    <i class="fas fa-user"></i>
+                    <p>Profil</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/logout" class="nav-link" id="logout-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p>déconnexion</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -446,5 +309,72 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
+
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  $(document).ready(function() {
+      $('#userTable').DataTable({
+          "language": {
+              "decimal": "",
+              "emptyTable": "Aucune donnée disponible dans le tableau",
+              "info": "Affichage de _START_ à _END_ de _TOTAL_ entrées",
+              "infoEmpty": "Affichage de 0 à 0 de 0 entrées",
+              "infoFiltered": "(filtré à partir de _MAX_ entrées totales)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Afficher _MENU_ entrées",
+              "loadingRecords": "Chargement...",
+              "processing": "Traitement...",
+              "search": "Rechercher:",
+              "zeroRecords": "Aucun enregistrement correspondant trouvé",
+              "paginate": {
+                  "first": "Premier",
+                  "last": "Dernier",
+                  "next": "Suivant",
+                  "previous": "Précédent"
+              },
+              "aria": {
+                  "sortAscending": ": activer pour trier la colonne par ordre croissant",
+                  "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+              }
+          }
+      });
+  });
+</script>
+
+  
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const toggleButton = document.getElementById('toggleAddServiceForm');
+      const formContainer = document.getElementById('addServiceForm');
+
+      toggleButton.addEventListener('click', function () {
+          formContainer.classList.toggle('hidden');
+      });
+  });
+</script>
+<script>
+  document.getElementById('logout-link').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default action (navigation)
+      if (confirm('Êtes-vous sûr de vouloir vous déconnecter?')) {
+          window.location.href = this.href; // If the user confirms, proceed with the logout
+      }
+  });
+  </script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+   

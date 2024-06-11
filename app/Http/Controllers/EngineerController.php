@@ -14,7 +14,10 @@ class EngineerController extends Controller
         $engineer = Auth::user();
 
         // Retrieve reclamations assigned to the engineer
-        $reclamations = reclamation::where('engineer_id', $engineer->id)->get();
+        $reclamations = reclamation::where('engineer_id', $engineer->id)
+                               ->where('status', '!=', 'rejetée')
+                               ->get();
+        
 
         // Return the view with the reclamations
         return view('Engineer', compact('reclamations'));

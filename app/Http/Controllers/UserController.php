@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {   
+    
+
     public function Profile(Request $request){
         return view('Profile');
     }
@@ -84,7 +86,7 @@ class UserController extends Controller
             }
             
         else{
-            return redirect()->route('logedIn');
+            return  'fuck you';
         }
 
         }
@@ -99,7 +101,7 @@ class UserController extends Controller
       
     ]);
        User::create($incomingFields);
-        return redirect('/admin');
+        return redirect('/admin')->with('success',"l'utiisateur a bien ete ajouter");
     }
 }
 

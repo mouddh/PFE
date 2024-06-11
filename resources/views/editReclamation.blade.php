@@ -30,13 +30,13 @@
                         <h3>Saisir votre réclamation</h3>
                     </div>
                     <div class="card-body">
-                        <form action="/Details/{{$post->id}}" method="POST" enctype="multipart/form-data">
+                        <form action="/Details/{{$post->id}}" method="PUT" enctype="multipart/form-data">
                             @csrf
-    
+                          @method('PUT')
                             <!-- Title Input -->
                             <div class="form-group">
                                 <label for="titre"><strong>Titre</strong></label>
-                                <input type="text" name="titre" class="form-control @error('titre') is-invalid @enderror" id="titre" value="{{ old('titre') }}" required>
+                                <input type="text" name="titre" class="form-control @error('titre') is-invalid @enderror" id="titre" value="{{ old('titre',$post->titre) }}"  required>
                                 @error('titre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,7 +47,7 @@
                             <!-- Description Textarea -->
                             <div class="form-group">
                                 <label for="description"><strong>Description</strong></label>
-                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5" required>{{ old('description') }}</textarea>
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5" required>{{ old('description', $post->description) }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                             <!-- Submit Button -->
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <button type="button" class="btn btn-secondary" onclick="window.location.href='/';">Annuler</button>
+                                <button type="button" class="btn btn-secondary" onclick="window.location.href='javascript:history.back()';">Annuler</button>
                             </div>
                         </form>
                     </div>
